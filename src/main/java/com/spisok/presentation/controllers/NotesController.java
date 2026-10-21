@@ -23,7 +23,7 @@ public class NotesController {
     }
 
     @PostMapping("/notes/create")
-    @ResponseStatus()
+    @ResponseStatus(HttpStatus.OK)
     public Note create(@RequestBody CreateNoteRequest request){
         return new Note(request.title(), request.description());
     }
