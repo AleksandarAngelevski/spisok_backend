@@ -22,7 +22,7 @@ public class NotesController {
         return ResponseEntity.ok("Test");
     }
 
-    @PostMapping("notes/create")
+    @PostMapping("/notes/create")
     @ResponseStatus()
     public Note create(@RequestBody CreateNoteRequest request){
         return new Note(request.title(), request.description());
