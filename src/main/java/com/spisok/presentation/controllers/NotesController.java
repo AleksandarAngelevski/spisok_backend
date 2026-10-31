@@ -7,7 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
+@RequestMapping("/api")
 public class NotesController {
 
     private final NotesRepository repository;
@@ -17,14 +20,15 @@ public class NotesController {
     }
 
     @GetMapping("/notes")
-    @ResponseStatus
-    public ResponseEntity<String> GetAllNotes(){
-        return ResponseEntity.ok("Test");
+    @ResponseStatus(HttpStatus.OK)
+    public List<Note> GetAllNotes(){
+        return repository.getAllBy();
     }
 
     @PostMapping("/notes/create")
     @ResponseStatus(HttpStatus.OK)
     public Note create(@RequestBody CreateNoteRequest request){
-        return new Note(request.title(), request.description());
+        Note temp = new Note(request.title(), request.description());
+        return repository.save(temp);
     }
 }
