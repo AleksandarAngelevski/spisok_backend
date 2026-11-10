@@ -1,6 +1,6 @@
-package com.spisok.repository;
+package com.spisok.domain.repository;
 
-import com.spisok.domain.Note;
+import com.spisok.domain.model.Note;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 

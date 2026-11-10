@@ -1,4 +1,4 @@
-package com.spisok.domain;
+package com.spisok.domain.model;
 
 import jakarta.persistence.*;
 

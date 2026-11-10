@@ -1,10 +1,10 @@
 package com.spisok.presentation.controllers;
 
-import com.spisok.domain.Note;
+import com.spisok.application.service.NotesService;
+import com.spisok.domain.model.Note;
 import com.spisok.presentation.dto.CreateNoteRequest;
-import com.spisok.repository.NotesRepository;
+import com.spisok.domain.repository.NotesRepository;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,22 +13,21 @@ import java.util.List;
 @RequestMapping("/api")
 public class NotesController {
 
-    private final NotesRepository repository;
+    private final NotesService service;
 
-    public NotesController(NotesRepository repository){
-        this.repository = repository;
+    public NotesController(NotesService service){
+        this.service = service;
     }
 
     @GetMapping("/notes")
     @ResponseStatus(HttpStatus.OK)
     public List<Note> GetAllNotes(){
-        return repository.getAllBy();
+        return service.list(null);
     }
 
     @PostMapping("/notes/create")
     @ResponseStatus(HttpStatus.OK)
     public Note create(@RequestBody CreateNoteRequest request){
-        Note temp = new Note(request.title(), request.description());
-        return repository.save(temp);
+        return service.create(request);
     }
 }
